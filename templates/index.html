@@ -1,1 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSE Hackathon Registration</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f3f4f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-4">
 
+    <!-- Registration Card -->
+    <div class="w-full max-w-xl mx-auto bg-white rounded-2xl shadow-xl p-8 md:p-10 transform transition-all duration-300">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-indigo-700 mb-2">Hackathon Registration</h1>
+            <p class="text-gray-500">Sign up for the CSE Hackathon 2024</p>
+        </div>
+
+        <!-- 🚨 Error Message Display Block -->
+        {% if error and error != "This email is already registered." %}
+        <div class="p-3 mb-4 text-sm text-red-700 bg-red-100 rounded-lg" role="alert">
+            <span class="font-medium">Error!</span> {{ error }}
+        </div>
+        {% endif %}
+        
+        <!-- Flask Form -->
+        <form id="registrationForm" class="space-y-6" method="POST" action="/register">
+            
+            <!-- Full Name Input -->
+            <div>
+                <label for="fullName" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                <input type="text" id="fullName" name="fullName" placeholder="John Doe" required
+                       value="{{ form_data.fullName | default('') }}"
+                       class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+
+            <!-- Email Input -->
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="you@example.com" required
+                       value="{{ form_data.email | default('') }}"
+                       class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm {% if error == 'This email is already registered.' %} border-red-500 focus:border-red-500 focus:ring-red-500 {% else %} focus:ring-indigo-500 focus:border-indigo-500 {% endif %} sm:text-sm">
+
+                <!-- 1. Email Error Message Below the Box -->
+                {% if error == 'This email is already registered.' %}
+                <p class="mt-1 text-xs text-red-500">This email is already registered.</p>
+                {% endif %}
+            </div>
+
+            <!-- Team Name Input -->
+            <div>
+                <label for="teamName" class="block text-sm font-medium text-gray-700 mb-1">Team Name</label>
+                <input type="text" id="teamName" name="teamName" placeholder="Tech Titans" required
+                       value="{{ form_data.teamName | default('') }}"
+                       class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+
+            <!-- Project Idea Textarea -->
+            <div>
+                <label for="projectIdea" class="block text-sm font-medium text-gray-700 mb-1">Project Idea (Optional)</label>
+                <textarea id="projectIdea" name="projectIdea" rows="3" placeholder="Briefly describe your project idea..."
+                          class="mt-1 block w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">{{ form_data.projectIdea | default('') }}</textarea>
+            </div>
+
+            <!-- Submission Button -->
+            <div>
+                <button type="submit"
+                        class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-lg text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200">
+                    Register
+                </button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
