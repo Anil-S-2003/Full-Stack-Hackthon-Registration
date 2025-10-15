@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Successful</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f3f4f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-4">
+
+    <div class="w-full max-w-xl mx-auto bg-white rounded-2xl shadow-xl p-8 md:p-10 text-center">
+        <div class="text-6xl text-green-500 mb-4">
+            <!-- Checkmark Icon (Inline SVG for modern look) -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-auto">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <path d="m9 11 3 3L22 4"></path>
+            </svg>
+        </div>
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Registration Complete!</h1>
+        
+        <p class="text-lg text-gray-600 mb-6">
+            Thank you, <span class="font-semibold text-indigo-600">{{ fullname }}</span>! Your registration details have been successfully recorded.
+        </p>
+
+        <!-- 2. Back Button -->
+        <a href="{{ url_for('home') }}" 
+           class="inline-flex items-center justify-center py-3 px-6 border border-transparent rounded-lg shadow-lg text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200">
+            &larr; Back
+        </a>
+    </div>
+
+</body>
+</html>
